@@ -46,7 +46,7 @@ export default [
       format: 'umd',
       file: 'dist/bundles/auth-vue.umd.js',
       sourcemap: true,
-      name: 'OktaVue',
+      name: 'AuthVue',
       exports: 'named',
       globals: {
         'oidc-client': 'OidcClient',
