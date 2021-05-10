@@ -7,34 +7,31 @@ import { REFERRER_PATH_STORAGE_KEY } from './constants';
 let _userMgr: UserManager;
 let _authRequired: AuthRequiredFunction;
 let _onAuthRequired: OnAuthRequiredFunction;
+let _debug: boolean = false;
 
 function setOriginalUri(originalUri: string): void {
-  const storage = localStorage;
-  storage.setItem(REFERRER_PATH_STORAGE_KEY, originalUri);
+  localStorage.setItem(REFERRER_PATH_STORAGE_KEY, originalUri);
 }
 
 export function getOriginalUri(): string | null {
-  const storage = localStorage;
-  const originalUri = storage.getItem(REFERRER_PATH_STORAGE_KEY);
+  const originalUri = localStorage.getItem(REFERRER_PATH_STORAGE_KEY);
   return originalUri;
 }
 
 export function removeOriginalUri(): void {
-  const storage = localStorage;
-  storage.removeItem(REFERRER_PATH_STORAGE_KEY);
+  localStorage.removeItem(REFERRER_PATH_STORAGE_KEY);
 }
 
-function isAuthenticated(userMgr: UserManager) {
-  return userMgr !== null && userMgr.getUser() !== null;
+async function isAuthenticated(userMgr: UserManager) {
+  return userMgr !== null && await userMgr.getUser() !== null;
 }
 
 const guardSecureRoute = async (userMgr: UserManager) => {
-  if (!isAuthenticated(userMgr)) {
-    if (_onAuthRequired) {
-      await _onAuthRequired(userMgr)
-    } else {
-      await userMgr.signinRedirect()
-    }
+  if (_onAuthRequired) {
+    await _onAuthRequired(userMgr)
+  } else {
+    _debug && console.log('Start redirecting to login');
+    await userMgr.signinRedirect()
   }
 }
 
@@ -43,8 +40,9 @@ export const navigationGuard = async (to: RouteLocationNormalized) => {
     // track the originalUri for guardSecureRoute
     setOriginalUri(to.fullPath);
 
-    // guard the secure route based on the authState when enter
-    const isAuth = isAuthenticated(_userMgr);
+    // guard the secure route
+    const isAuth = await isAuthenticated(_userMgr);
+    _debug && console.log('Not authenticated, start to guard the route');
     if (!isAuth) {
       await guardSecureRoute(_userMgr)
       return false
@@ -61,6 +59,8 @@ function install (app: App, options: AuthVueOptions) {
     Oidc.Log.logger = console;
     Oidc.Log.level = Oidc.Log.DEBUG;
   }
+
+  _debug = options.debug;
 
   _userMgr = new UserManager(options);
   _authRequired = options.authRequired || (to => to.matched.some(record => record.meta.requiresAuth));

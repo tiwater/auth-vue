@@ -10,3 +10,9 @@ export interface AuthVueOptions extends OidcClientSettings {
   onAuthResume: OnAuthRequiredFunction;
   debug: boolean;
 }
+
+declare module '@vue/runtime-core' {
+  interface ComponentCustomProperties {
+    $userMgr: UserManager;
+  }
+}
