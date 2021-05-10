@@ -10,16 +10,8 @@ export default defineComponent({
   },
   async beforeMount () {
     try {
-      await this.$auth.handleLoginRedirect()
+      await this.$userMgr.signinRedirectCallback()
     } catch (e) {
-      if (this.$auth.isInteractionRequiredError(e)) {
-        const { onAuthResume, onAuthRequired } = this.$auth.options;
-        const callbackFn = onAuthResume || onAuthRequired;
-        if (callbackFn) {
-          callbackFn(this.$auth);
-          return;
-        }
-      }
       this.error = e.toString();
     }
   },
