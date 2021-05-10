@@ -1,12 +1,17 @@
 {
   "name": "auth-vue",
-  "version": "0.1.0",
+  "version": "0.1.5",
   "description": "Auth component for Vue apps",
   "main": "dist/bundles/auth-vue.cjs.js",
+  "module": "dist/bundles/auth-vue.esm.js",
+  "types": "dist/bundles/types/index.d.ts",
+  "files": [
+    "bundles",
+    "src"
+  ],
   "repository": "git@github.com:tiwater/auth-vue.git",
   "author": "Tiwater Team",
   "license": "private",
-  "private": true,
   "scripts": {
     "build": "node build.js",
     "bundle": "rollup -c rollup.config.js"
@@ -31,6 +36,15 @@
     "vue-jest": "^5.0.0-alpha.7",
     "vue-router": "^4.0.0-0"
   },
+  "engines": {
+    "node": ">= 4.0.0",
+    "yarn": ">= 1.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ],
   "peerDependencies": {
     "oidc-client": "^1.11.5",
     "vue": "^3.0.0",

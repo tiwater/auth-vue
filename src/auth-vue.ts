@@ -1,10 +1,11 @@
 import { App } from 'vue'
 import { RouteLocationNormalized } from 'vue-router'
 import Oidc, { UserManager } from 'oidc-client'
-import { OnAuthRequiredFunction, AuthVueOptions } from './types'
+import { OnAuthRequiredFunction, AuthVueOptions, AuthRequiredFunction } from './types'
 import { REFERRER_PATH_STORAGE_KEY } from './constants';
 
 let _userMgr: UserManager;
+let _authRequired: AuthRequiredFunction;
 let _onAuthRequired: OnAuthRequiredFunction;
 
 function setOriginalUri(originalUri: string): void {
@@ -38,7 +39,7 @@ const guardSecureRoute = async (userMgr: UserManager) => {
 }
 
 export const navigationGuard = async (to: RouteLocationNormalized) => {
-  if (to.matched.some(record => record.meta.requiresAuth)) {
+  if (_authRequired(to)) {
     // track the originalUri for guardSecureRoute
     setOriginalUri(to.fullPath);
 
@@ -62,9 +63,10 @@ function install (app: App, options: AuthVueOptions) {
   }
 
   _userMgr = new UserManager(options);
+  _authRequired = options.authRequired || (to => to.matched.some(record => record.meta.requiresAuth));
   _onAuthRequired = options.onAuthRequired;
 
-  // add oktaAuth instance to Vue
+  // add UserManager instance to Vue
   app.config.globalProperties.$userMgr = _userMgr;
 }
 
