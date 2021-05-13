@@ -16,7 +16,7 @@
     "build": "node build.js",
     "bundle": "rollup -c rollup.config.js",
     "prepare": "yarn build",
-    "start": "yarn --cwd test/app start"
+    "start": "yarn --cwd demo/app start"
   },
   "devDependencies": {
     "@rollup/plugin-replace": "^2.4.2",

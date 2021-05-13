@@ -8,11 +8,16 @@ export default defineComponent({
       error: null
     };
   },
-  async beforeMount () {
+  async created () {
     try {
-      await this.$userMgr.signinRedirectCallback()
+      console.log('LoginCallback.created')
+      await this.$userMgr.signinRedirectCallback().then((user) => {
+        console.log('LoginCallback.created user:', user);
+        this.$router.push(user.state || '/');
+      })
     } catch (e) {
       this.error = e.toString();
+      console.log('LoginCallback.created Error:', e);
     }
   },
   render() {

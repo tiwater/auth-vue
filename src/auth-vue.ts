@@ -59,6 +59,8 @@ function install (app: App, options: AuthVueOptions) {
     Oidc.Log.logger = console;
     Oidc.Log.level = Oidc.Log.DEBUG;
   }
+  
+  console.log('AuthVue.install')
 
   _debug = options.debug;
 
@@ -68,6 +70,18 @@ function install (app: App, options: AuthVueOptions) {
 
   // add UserManager instance to Vue
   app.config.globalProperties.$userMgr = _userMgr;
+  //app.provide('userMgr', _userMgr);
+  if (options.userStore) {
+    app.config.globalProperties.$userStore = options.userStore;
+  }
+
+  app.mixin({
+    data () {
+      return {
+        userStore: this.$userStore
+      }
+    }
+  })
 }
 
 export default { install }
