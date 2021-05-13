@@ -13,10 +13,9 @@
           &nbsp;
           Auth-Vue Sample App
         </router-link>
-        <!--
         <a
           class="item"
-          v-if="!user || !user.profile"
+          v-if="!user"
           v-on:click="login()"
         >
         Login
@@ -25,7 +24,7 @@
           to="/messages"
           class="item"
           id="messages-button"
-          v-if="user && user.profile"
+          v-if="user"
         >
           <i
             aria-hidden="true"
@@ -37,19 +36,18 @@
           to="/profile"
           class="item"
           id="profile-button"
-          v-if="user && user.profile"
+          v-if="user"
         >
         Profile
         </router-link>
         <a
           id="logout-button"
           class="item"
-          v-if="user && user.profile"
+          v-if="user"
           v-on:click="logout()"
         >
         Logout
         </a>
-        -->
       </div>
     </div>
     <div
@@ -62,26 +60,33 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, getCurrentInstance } from 'vue'
+import { User, UserManager } from 'oidc-client'
+import { defineComponent, inject, ref } from 'vue'
 
 export default defineComponent({
   name: 'app',
   data: function () {
     return {
-      user: {}
+      userMgr: inject<UserManager>('userMgr'),
+      user: ref({}),
     }
   },
   methods: {
-    // async setup() {
-    //   const app = getCurrentInstance()
-    //   const $userMgr = app && app.appContext.config.globalProperties.$userMgr
-    //   this.user = $userMgr.getUser()
-    // },
-    // async login() {
-    //   const app = getCurrentInstance()
-    //   const $userMgr = app && app.appContext.config.globalProperties.$userMgr
-    //   await $userMgr.signinRedirect( { state: window.location.pathname })
-    // } 
+    async setup() {
+      if (this.userMgr) {
+        await this.userMgr.getUser().then((val) => this.user = val as User);
+      }
+    },
+    async login() {
+      if (this.userMgr) {
+        await this.userMgr.signinRedirect( { state: window.location.pathname })
+      }
+    },
+    async logout() {
+      if (this.userMgr) {
+        await this.userMgr.signoutRedirect( { state: '/' })
+      }
+    } 
   }
 })
 </script>
