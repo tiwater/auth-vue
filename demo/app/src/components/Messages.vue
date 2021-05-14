@@ -57,6 +57,7 @@
 
 <script type="ts">
 import axios from 'axios'
+import { defineComponent } from "vue";
 
 const config = {
   oidc: {
@@ -69,7 +70,7 @@ const config = {
   }
 }
 
-export default {
+export default defineComponent ({
   name: 'Messages',
   data () {
     return {
@@ -109,5 +110,5 @@ export default {
       this.failed = true
     }
   }
-}
+})
 </script>

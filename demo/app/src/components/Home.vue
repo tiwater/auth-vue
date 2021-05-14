@@ -54,37 +54,44 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { User, UserManager } from "oidc-client";
+import { ref, defineComponent, inject, onMounted } from "vue";
+
+export default defineComponent ({
   name: 'home',
-  data: function () {
-    return {
-      claims: '',
-      user: {},
-      resourceServerExamples: [
-        {
-          label: 'Resource Server Example',
-          url: 'https://github.com/okta/samples-nodejs-express-4/tree/master/resource-server'
-        }
-      ]
-    }
-  },
-  created () { this.setup() },
-  methods: {
-    async setup () {
-      this.user = await this.$userMgr.getUser()
-    },
-    async login () {
+  setup() {
+    const userMgr = inject<UserManager>('userMgr')
+    const user = ref<User>({} as User);
+
+    const resourceServerExamples = [
+      {
+        label: 'Resource Server Example',
+        url: 'https://github.com/okta/samples-nodejs-express-4/tree/master/resource-server'
+      }
+    ];
+    onMounted( async () => { 
+      await userMgr!.getUser().then((_user) => {
+        if (_user) {
+          user.value = _user;
+      }}); 
+    });
+
+    function login () {
       console.log('Home: login');
-      this.$userMgr.getUser
-      await this.$userMgr.signinRedirect({state: window.location.pathname }).then(user => {
-        this.user = user;
+      userMgr && userMgr.signinRedirect({state: window.location.pathname }).then(user => {
         console.log('Home this.$userMgr.signinRedirect:', user);
-      }).catch((err) => { console.log('Login Error: ', err); });
-    },
-    async logout () {
-      await this.$userMgr.signoutRedirect();
+      }).catch((err: any) => { console.log('Login Error: ', err); });
+    }
+    function logout () {
+      userMgr && userMgr.signoutRedirect();
+    }
+    return {
+      user,
+      login,
+      logout,
+      resourceServerExamples
     }
   }
-}
+})
 </script>

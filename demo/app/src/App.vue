@@ -61,35 +61,40 @@
 
 <script lang="ts">
 import { User, UserManager } from 'oidc-client'
-import { defineComponent, inject, ref } from 'vue'
+import { defineComponent, inject, onMounted, ref } from 'vue'
 
 export default defineComponent({
   name: 'app',
-  data: function () {
-    return {
-      userMgr: inject<UserManager>('userMgr'),
-      user: ref({}),
-    }
-  },
-  created () { this.setup() },
-  methods: {
-    async setup() {
-      if (this.userMgr) {
-        await this.userMgr.getUser().then((val) => this.user = val as User);
-      }
+  setup () {
+    const userMgr = inject<UserManager>('userMgr');
+    const user = ref<User>({} as User);
 
-      console.log('App.vue user: ', this.user);
-    },
-    async login() {
-      if (this.userMgr) {
-        await this.userMgr.signinRedirect( { state: window.location.pathname })
+    onMounted(async () => { 
+      if (userMgr) {
+        await userMgr.getUser().then((_user) => { 
+          if (_user) {
+            user.value = _user;
+            console.log('App.onMounted user', user.value)
+          }
+        }); 
       }
-    },
-    async logout() {
-      if (this.userMgr) {
-        await this.userMgr.signoutRedirect( { state: '/' })
+    });
+
+    function login() {
+      if (userMgr) {
+        userMgr.signinRedirect( { state: window.location.pathname })
+      }
+    }
+    function logout() {
+      if (userMgr) {
+        userMgr.signoutRedirect( { state: '/' })
       }
     } 
+    return {
+      user,
+      login,
+      logout
+    }
   }
 })
 </script>

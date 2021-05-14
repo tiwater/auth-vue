@@ -1,4 +1,4 @@
-import { WebStorageStateStore } from 'oidc-client'
+import { User, UserManager, WebStorageStateStore } from 'oidc-client'
 import { createApp } from 'vue'
 import AuthVue from '../../../dist'
 import App from './App.vue'
