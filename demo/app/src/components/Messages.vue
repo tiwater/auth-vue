@@ -16,14 +16,14 @@
         <div class="header">Failed to fetch messages. Please verify the following:</div>
         <ul class="list">
           <li class="content">You've downloaded one of our resource server examples, and it's running on port 8000.</li>
-          <li class="content">Your resource server example is using the same Okta authorization server (issuer) that you have configured this Vue
+          <li class="content">Your resource server example is using the same ISSUER that you have configured this Vue
             application to use.</li>
         </ul>
       </div>
     </div>
 
     <div v-if="messages.length">
-      <p>This component makes a GET request to the resource server example, which must be running at
+      <p>This component makes a GET request to the resource server running at
         <code>localhost:8000/api/messages</code>
       </p>
       <p>It attaches your current access token in the
@@ -31,7 +31,7 @@
         the server will return a list of messages. If the token is not valid or the resource server is incorrectly configured,
         you will see a 401
         <code>Unauthorized response</code>.</p>
-      <p>This route is protected by Okta with the <code>requiresAuth: true</code> metadata in <code>router/index.js</code>. This ensures that this page cannot be accessed until you have authenticated and have an access token
+      <p>This route is protected with the <code>requiresAuth: true</code> metadata in <code>router/index.js</code>. This ensures that this page cannot be accessed until you have authenticated and have an access token
         in local storage.</p>
       <table class="ui table">
         <thead>
@@ -79,12 +79,15 @@ export default {
   },
   async created () {
     try {
-      const accessToken = this.$auth.getAccessToken()
+      const user = await this.$userMgr.getUser();
+
+      console.log('Messages.vue user:', user.access_token);
+      
       const response = await axios.get(
         config.resourceServer.messagesUrl,
         {
           headers: {
-            Authorization: `Bearer ${accessToken}`
+            Authorization: `Bearer ${user.access_token}`
           }
         }
       )
