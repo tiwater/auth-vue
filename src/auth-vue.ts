@@ -70,18 +70,9 @@ function install (app: App, options: AuthVueOptions) {
 
   // add UserManager instance to Vue
   app.config.globalProperties.$userMgr = _userMgr;
-  app.provide('userMgr', _userMgr);
-  if (options.userStore) {
-    app.config.globalProperties.$userStore = options.userStore;
-  }
 
-  app.mixin({
-    data () {
-      return {
-        userStore: this.$userStore
-      }
-    }
-  })
+  // In App.vue, this.$userMgr is not accessible, have to use provide/inject instead.
+  app.provide('userMgr', _userMgr);
 }
 
 export default { install }

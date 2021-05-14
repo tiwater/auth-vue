@@ -15,7 +15,7 @@
         </router-link>
         <a
           class="item"
-          v-if="!user"
+          v-if="!user || !user.profile"
           v-on:click="login()"
         >
         Login
@@ -24,7 +24,7 @@
           to="/messages"
           class="item"
           id="messages-button"
-          v-if="user"
+          v-if="user && user.profile"
         >
           <i
             aria-hidden="true"
@@ -36,14 +36,14 @@
           to="/profile"
           class="item"
           id="profile-button"
-          v-if="user"
+          v-if="user && user.profile"
         >
         Profile
         </router-link>
         <a
           id="logout-button"
           class="item"
-          v-if="user"
+          v-if="user && user.profile"
           v-on:click="logout()"
         >
         Logout
@@ -71,11 +71,14 @@ export default defineComponent({
       user: ref({}),
     }
   },
+  created () { this.setup() },
   methods: {
     async setup() {
       if (this.userMgr) {
         await this.userMgr.getUser().then((val) => this.user = val as User);
       }
+
+      console.log('App.vue user: ', this.user);
     },
     async login() {
       if (this.userMgr) {

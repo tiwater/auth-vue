@@ -1,6 +1,6 @@
 {
-  "name": "auth-test.app",
-  "version": "0.1.0",
+  "name": "Auth-Vue",
+  "version": "0.2.0",
   "private": true,
   "scripts": {
     "start": "vue-cli-service serve",
