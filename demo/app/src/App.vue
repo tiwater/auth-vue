@@ -11,7 +11,7 @@
             src="./assets/logo.png"
           >
           &nbsp;
-          Auth-Vue Sample App
+          Auth-Vue Demo
         </router-link>
         <a
           class="item"
