@@ -87,6 +87,7 @@ export default defineComponent({
     }
     function logout() {
       if (userMgr) {
+        location.reload();
         userMgr.signoutRedirect( { state: '/' })
       }
     } 

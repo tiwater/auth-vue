@@ -6,6 +6,9 @@
     "jsx": "preserve",
     "importHelpers": true,
     "moduleResolution": "node",
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "baseUrl": ".",
     "types": [
@@ -14,9 +17,6 @@
     "paths": {
       "@/*": [
         "src/*"
-      ],
-      "@auth-vue/*": [
-        "../../dist"
       ]
     },
     "lib": [

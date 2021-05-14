@@ -1,6 +1,6 @@
 <template>
   <div id="home">
-    <h1 class="ui header">Login Page</h1>
+    <h1 class="ui header">Home Page</h1>
     <div v-if="!user || !user.profile">
       <p>If you‘re viewing this page then you have successfully started this Vue application.</p>
       <p>This example shows you how to use the

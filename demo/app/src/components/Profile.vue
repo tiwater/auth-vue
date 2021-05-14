@@ -6,7 +6,7 @@
         class="drivers license outline icon"
       >
       </i>
-      My User Profile
+      My Profile
     </h1>
     <p>
       Below is the information from your ID token and is now stored in local storage.
@@ -62,23 +62,17 @@ export default defineComponent ({
   setup () {
     const claims = ref([{claim: '', value: '' }]);
     const profiles = ref([{name: '', value: '' }]);
-    const fetchUser = async () => {
+
+    onMounted(async () => {
       let userMgr = inject<UserManager>('userMgr');
       if (userMgr) {
-        await userMgr.getUser().then((user) => {
-          if (user) {
-            const _claims = Object.entries(user).map(entry => ({ claim: entry[0], value: entry[1] }))
-            claims.value = _claims;
-
-            const _profiles = Object.entries(user.profile).map(entry => ({ name: entry[0], value: entry[1] }))
-            profiles.value = _profiles;
+        await userMgr.getUser().then((_user) => {
+          if (_user) {
+            claims.value = Object.entries(_user).map(entry => ({ claim: entry[0], value: entry[1] }))
+            profiles.value = Object.entries(_user.profile).map(entry => ({ name: entry[0], value: entry[1] }))
           }
         });
       }
-    }
-
-    onMounted(() => {
-      fetchUser();
     })
 
     return {

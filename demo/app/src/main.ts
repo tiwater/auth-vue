@@ -1,4 +1,3 @@
-import { User, UserManager, WebStorageStateStore } from 'oidc-client'
 import { createApp } from 'vue'
 import AuthVue from '../../../dist'
 import App from './App.vue'
@@ -19,11 +18,10 @@ const config = {
 
   filterProtocolClaims: true,
   loadUserInfo: true,
-  debug: true,
-  userStore: new WebStorageStateStore({ store: window.localStorage })
+  debug: true
 }
 
-const app = createApp(App)
-app.use(router)
-app.use(AuthVue, config)
-app.mount('#app')
+createApp(App)
+.use(router)
+.use(AuthVue, config)
+.mount('#app')
