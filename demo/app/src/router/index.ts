@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { LoginCallback, navigationGuard } from '../../../../dist'
+import { LoginCallback, navigationGuard } from 'auth-vue'
 import HomeComponent from '@/components/Home.vue';
 import ProfileComponent from '@/components/Profile.vue';
 import MessagesComponent from '@/components/Messages.vue';

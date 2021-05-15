@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-import AuthVue from '../../../dist'
+import AuthVue from 'auth-vue'
 import App from './App.vue'
 import router from './router'
 

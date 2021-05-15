@@ -908,6 +908,11 @@ atob@^2.1.2:
   resolved "https://registry.npm.taobao.org/atob/download/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
   integrity sha1-bZUX654DDSQ2ZmZR6GvZ9vE1M8k=
 
+auth-vue@^0.1.11:
+  version "0.1.11"
+  resolved "https://registry.nlark.com/auth-vue/download/auth-vue-0.1.11.tgz#9e6d802fa1f2accb620ee08fb28f6633c7f92d2e"
+  integrity sha1-nm2AL6HyrMtiDuCPso9mM8f5LS4=
+
 autoprefixer@^9.8.6:
   version "9.8.6"
   resolved "https://registry.nlark.com/autoprefixer/download/autoprefixer-9.8.6.tgz#3b73594ca1bf9266320c5acf1588d74dea74210f"
