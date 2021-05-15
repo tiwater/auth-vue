@@ -10,9 +10,7 @@ export default defineComponent({
   },
   async created () {
     try {
-      console.log('LoginCallback.created')
       await this.$userMgr.signinRedirectCallback().then((user) => {
-        console.log('LoginCallback.created user:', user);
         this.$router.push(user.state || '/');
       })
     } catch (e) {

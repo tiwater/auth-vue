@@ -59,8 +59,6 @@ function install (app: App, options: AuthVueOptions) {
     Oidc.Log.logger = console;
     Oidc.Log.level = Oidc.Log.DEBUG;
   }
-  
-  console.log('AuthVue.install')
 
   _debug = options.debug;
 
