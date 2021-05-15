@@ -1,6 +1,6 @@
 {
   "name": "auth-vue",
-  "version": "0.1.10",
+  "version": "0.1.12",
   "description": "Auth component for Vue apps",
   "main": "dist/bundles/auth-vue.cjs.js",
   "module": "dist/bundles/auth-vue.esm.js",

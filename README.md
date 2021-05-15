@@ -3,6 +3,8 @@ Authentication component for Vue application
 
 ## Demo
 
+Before running, make sure ports 8080 and 8000 are not occupied.
+
 ### Run app demo 
 
 ```
