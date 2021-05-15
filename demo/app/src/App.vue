@@ -72,23 +72,23 @@ export default defineComponent({
 
     const fetchUser = async () => {
       if (userMgr) {
-        await userMgr.getUser().then((_user) => { 
+        await userMgr.getUser().then((_user) => {
           if (_user) {
             user.value = _user;
             console.log('App.onMounted user', user.value)
           }
-        }); 
+        });
       }
     }
 
-    onMounted(async () => { 
+    onMounted(async () => {
       if (userMgr) {
-        userMgr.events.addUserSignedIn(() => {
-          console.log('userMgr.events.addUserSignedIn');
+        userMgr.events.addUserLoaded(() => {
+          console.log('userMgr.events.addUserLoaded');
           fetchUser();
         })
-        userMgr.events.addUserSignedOut(() => {
-          console.log('userMgr.events.addUserSignedOut');
+        userMgr.events.addUserUnloaded(() => {
+          console.log('userMgr.events.addUserUnloaded');
           user.value = {} as User;
         })
       }
@@ -104,7 +104,7 @@ export default defineComponent({
       if (userMgr) {
         userMgr.signoutRedirect( { state: '/' })
       }
-    } 
+    }
     return {
       user,
       login,
