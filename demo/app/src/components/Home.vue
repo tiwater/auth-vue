@@ -67,7 +67,7 @@ export default defineComponent ({
     const resourceServerExamples = [
       {
         label: 'Resource Server Example',
-        url: 'https://github.com/okta/samples-nodejs-express-4/tree/master/resource-server'
+        url: 'https://github.com/tiwater/auth-vue/tree/main/demo/resource-server'
       }
     ];
     onMounted( async () => { 
