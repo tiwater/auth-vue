@@ -31,7 +31,7 @@ const guardSecureRoute = async (userMgr: UserManager) => {
     await _onAuthRequired(userMgr)
   } else {
     _debug && console.log('Start redirecting to login');
-    await userMgr.signinRedirect()
+    await userMgr.signinRedirect({ state: window.location.pathname })
   }
 }
 
