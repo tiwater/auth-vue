@@ -62,6 +62,7 @@
 <script lang="ts">
 import { User, UserManager } from 'oidc-client'
 import { defineComponent, inject, onMounted, ref } from 'vue'
+import { useRouter } from 'vue-router';
 
 export default defineComponent({
   name: 'app',
@@ -69,7 +70,7 @@ export default defineComponent({
     const userMgr = inject<UserManager>('userMgr');
     const user = ref<User>({} as User);
 
-    onMounted(async () => { 
+    const fetchUser = async () => {
       if (userMgr) {
         await userMgr.getUser().then((_user) => { 
           if (_user) {
@@ -78,6 +79,20 @@ export default defineComponent({
           }
         }); 
       }
+    }
+
+    onMounted(async () => { 
+      if (userMgr) {
+        userMgr.events.addUserSignedIn(() => {
+          console.log('userMgr.events.addUserSignedIn');
+          fetchUser();
+        })
+        userMgr.events.addUserSignedOut(() => {
+          console.log('userMgr.events.addUserSignedOut');
+          user.value = {} as User;
+        })
+      }
+      fetchUser();
     });
 
     function login() {
@@ -87,7 +102,6 @@ export default defineComponent({
     }
     function logout() {
       if (userMgr) {
-        location.reload();
         userMgr.signoutRedirect( { state: '/' })
       }
     } 
