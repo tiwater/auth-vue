@@ -11,7 +11,11 @@
   ],
   "repository": "git@github.com:tiwater/auth-vue.git",
   "author": "Tiwater Team",
-  "license": "private",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/tiwater/auth-vue/issues"
+  },
+  "homepage": "https://github.com/tiwater/auth-vue#readme",
   "scripts": {
     "build": "node build.js",
     "bundle": "rollup -c rollup.config.js",
