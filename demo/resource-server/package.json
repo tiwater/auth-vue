@@ -1,10 +1,11 @@
 {
   "name": "resource-server",
-  "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "version": "0.2.22",
+  "title": "Message Services for AuthVue Demo",
+  "description": "An API service to demonstrate the usage of resource authorization.",
+  "author": "Tiwater Team",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "MIT",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
