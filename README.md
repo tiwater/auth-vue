@@ -1,11 +1,20 @@
-# auth-vue
+[Tiwater Auth Vue]: https://github.com/tiwater/auth-vue
+[vue-router]: https://router.vuejs.org/en/essentials/getting-started.html
+[globalProperties]: https://v3.vuejs.org/api/application-config.html#globalproperties
+[Vue Plugin]: https://v3.vuejs.org/guide/plugins.html
+
+# Auth-Vue
+[![npm version](https://img.shields.io/npm/v/auth-vue.svg?style=flat-square)](https://www.npmjs.com/package/auth-vue)
+![github build status](https://github.com/tiwater/auth-vue/actions/workflows/main.yml/badge.svg)
+
+
 Authentication component for Vue application
 
 ## Demo
 
 Before running, make sure ports 8080 and 8000 are not occupied.
 
-### Run app demo 
+### Run app demo
 
 ```
 yarn demo:app

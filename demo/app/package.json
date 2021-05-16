@@ -7,7 +7,7 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
-    "auth-vue": "^0.2.22",
+    "auth-vue": "^0.2.23",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "semantic-ui-css": "^2.4.1",
