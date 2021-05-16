@@ -6,7 +6,9 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const options = new DocumentBuilder()
-    .setTitle('Message Services for AuthVue Demo')
+    .setTitle(process.env.npm_package_title)
+    .setDescription(process.env.npm_package_description)
+    .setVersion(process.env.npm_package_version)
     .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, options);
