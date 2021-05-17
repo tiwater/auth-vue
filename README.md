@@ -7,8 +7,7 @@
 [![npm version](https://img.shields.io/npm/v/auth-vue.svg?style=flat-square)](https://www.npmjs.com/package/auth-vue)
 ![github build status](https://github.com/tiwater/auth-vue/actions/workflows/main.yml/badge.svg)
 
-
-Authentication component for Vue application
+OIDC authentication component for Vue application
 
 ## Demo
 
