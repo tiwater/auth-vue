@@ -2,25 +2,11 @@ import { App } from 'vue'
 import { RouteLocationNormalized } from 'vue-router'
 import Oidc, { UserManager } from 'oidc-client'
 import { OnAuthRequiredFunction, AuthVueOptions, AuthRequiredFunction } from './types'
-import { REFERRER_PATH_STORAGE_KEY } from './constants';
 
 let _userMgr: UserManager;
 let _authRequired: AuthRequiredFunction;
 let _onAuthRequired: OnAuthRequiredFunction;
 let _debug: boolean = false;
-
-function setOriginalUri(originalUri: string): void {
-  localStorage.setItem(REFERRER_PATH_STORAGE_KEY, originalUri);
-}
-
-export function getOriginalUri(): string | null {
-  const originalUri = localStorage.getItem(REFERRER_PATH_STORAGE_KEY);
-  return originalUri;
-}
-
-export function removeOriginalUri(): void {
-  localStorage.removeItem(REFERRER_PATH_STORAGE_KEY);
-}
 
 async function isAuthenticated(userMgr: UserManager) {
   return userMgr !== null && await userMgr.getUser() !== null;
@@ -37,9 +23,6 @@ const guardSecureRoute = async (userMgr: UserManager) => {
 
 export const navigationGuard = async (to: RouteLocationNormalized) => {
   if (_authRequired(to)) {
-    // track the originalUri for guardSecureRoute
-    setOriginalUri(to.fullPath);
-
     // guard the secure route
     const isAuth = await isAuthenticated(_userMgr);
     _debug && console.log('Not authenticated, start to guard the route');

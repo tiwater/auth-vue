@@ -1,4 +1,4 @@
-import AuthVue, { navigationGuard, getOriginalUri } from './auth-vue';
+import AuthVue, { navigationGuard } from './auth-vue';
 import LoginCallback from './components/LoginCallback.vue';
 import LogoutCallback from './components/LogoutCallback.vue';
 
