@@ -63,10 +63,10 @@ export default defineComponent ({
     const claims = ref([{claim: '', value: '' }]);
     const profiles = ref([{name: '', value: '' }]);
 
-    onMounted(async () => {
+    onMounted(() => {
       let userMgr = inject<UserManager>('userMgr');
       if (userMgr) {
-        await userMgr.getUser().then((_user) => {
+        userMgr.getUser().then((_user) => {
           if (_user) {
             claims.value = Object.entries(_user).map(entry => ({ claim: entry[0], value: entry[1] }))
             profiles.value = Object.entries(_user.profile).map(entry => ({ name: entry[0], value: entry[1] }))

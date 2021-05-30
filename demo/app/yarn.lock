@@ -913,10 +913,8 @@ atob@^2.1.2:
   resolved "https://registry.npm.taobao.org/atob/download/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
   integrity sha1-bZUX654DDSQ2ZmZR6GvZ9vE1M8k=
 
-auth-vue@^0.2.23:
+auth-vue@../../dist/:
   version "0.2.23"
-  resolved "https://registry.yarnpkg.com/auth-vue/-/auth-vue-0.2.23.tgz#cec79c1a18e7565b4d7898d81d1fc17b54462448"
-  integrity sha512-RgkqmSXr2qZqo2sxBdMoh35RcKt3lAzUOOdO8ELxZsy/auRSzHDWUmAi9A4vHY7oEG2pm4x0dR/AgVSNSU9PIA==
 
 autoprefixer@^9.8.6:
   version "9.8.6"
@@ -6962,8 +6960,10 @@ watchpack@^1.7.4:
   resolved "https://registry.nlark.com/watchpack/download/watchpack-1.7.5.tgz#1267e6c55e0b9b5be44c2023aed5437a2c26c453"
   integrity sha1-EmfmxV4Lm1vkTCAjrtVDeiwmxFM=
   dependencies:
+    chokidar "^3.4.1"
     graceful-fs "^4.1.2"
     neo-async "^2.5.0"
+    watchpack-chokidar2 "^2.0.1"
   optionalDependencies:
     chokidar "^3.4.1"
     watchpack-chokidar2 "^2.0.1"

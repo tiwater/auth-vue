@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { LoginCallback, navigationGuard } from 'auth-vue'
+import { LoginCallback, LogoutCallback, navigationGuard } from 'auth-vue'
 import HomeComponent from '@/components/Home.vue';
 import ProfileComponent from '@/components/Profile.vue';
 import MessagesComponent from '@/components/Messages.vue';
@@ -11,6 +11,7 @@ const router = createRouter({
   routes: [
     { path: '/', component: HomeComponent, meta: { title: 'AuthVue Demo' } },
     { path: '/login/callback', component: LoginCallback, meta: { title: 'AuthVue Callback' } },
+    { path: '/logout/callback', component: LogoutCallback, meta: { title: 'AuthVue Callback' } },
     { path: '/profile', component: ProfileComponent, meta: { requiresAuth: true, title: 'Profile - AuthVue Demo' } },
     { path: '/messages', component: MessagesComponent, meta: { requiresAuth: true, title: 'Messages - AuthVue Demo' } },
   ]

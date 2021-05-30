@@ -70,8 +70,21 @@ export default defineComponent ({
         url: 'https://github.com/tiwater/auth-vue/tree/main/demo/resource-server'
       }
     ];
-    onMounted( async () => { 
-      await userMgr!.getUser().then((_user) => {
+
+    // Force the page refresh after login/logout
+    if (userMgr) {
+      userMgr.events.addUserLoaded((_user) => {
+        console.log('userMgr.events.addUserLoaded');
+        user.value = _user;
+      })
+      userMgr.events.addUserUnloaded(() => {
+        console.log('userMgr.events.addUserUnloaded');
+        user.value = {} as User;
+      })
+    }
+
+    onMounted(() => { 
+      userMgr!.getUser().then((_user) => {
         if (_user) {
           user.value = _user;
       }}); 
@@ -79,12 +92,12 @@ export default defineComponent ({
 
     function login () {
       console.log('Home: login');
-      userMgr && userMgr.signinRedirect({state: window.location.pathname }).then(user => {
-        console.log('Home this.$userMgr.signinRedirect:', user);
+      userMgr!.signinRedirect({state: window.location.pathname }).then(user => {
+        console.log('Home userMgr.signinRedirect:', user);
       }).catch((err: any) => { console.log('Login Error: ', err); });
     }
     function logout () {
-      userMgr && userMgr.signoutRedirect();
+      userMgr!.signoutRedirect();
     }
     return {
       user,

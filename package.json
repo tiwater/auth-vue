@@ -1,7 +1,7 @@
 {
   "name": "auth-vue",
-  "version": "0.2.23",
-  "description": "OIDC Component for Vue apps",
+  "version": "0.3.1",
+  "description": "OIDC Component for Vue",
   "main": "dist/bundles/auth-vue.cjs.js",
   "module": "dist/bundles/auth-vue.esm.js",
   "types": "dist/bundles/types/index.d.ts",

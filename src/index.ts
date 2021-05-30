@@ -1,6 +1,7 @@
 import AuthVue, { navigationGuard } from './auth-vue';
 import LoginCallback from './components/LoginCallback.vue';
+import LogoutCallback from './components/LogoutCallback.vue';
 
 export default AuthVue;
-export { LoginCallback, navigationGuard };
+export { LoginCallback, LogoutCallback, navigationGuard, getOriginalUri };
 export * from './types';

@@ -2,17 +2,17 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'LoginCallback',
+  name: 'LogoutCallback',
   data() { return { error: null }; },
   created() {
     try {
-      this.$userMgr.signinRedirectCallback().then((user) => {
-        console.log('LoginCallback.created:', user);
-        this.$router.push(user.state || '/');
+      this.$userMgr.signoutRedirectCallback().then((resp) => {
+        console.log('LogoutCallback.created:', resp);
+        this.$router.push(resp.state || '/');
       })
     } catch (e) {
       this.error = e.toString();
-      console.log('LoginCallback.created Error:', e);
+      console.log('LogoutCallback.created Error:', e);
     }
   },
   render() {
